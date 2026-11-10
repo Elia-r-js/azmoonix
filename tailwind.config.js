@@ -3,8 +3,12 @@ export default {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ], theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        vazirMatn: ['"Vazir Matn"', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
-

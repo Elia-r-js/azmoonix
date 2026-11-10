@@ -1,9 +1,10 @@
-import LoginPageView from "./Pages/login/view/LoginPageView";
+
+import AppRoutes from "./Utils/AppRoutes";
 
 export default function App() {
   return (
     <div>
-      <LoginPageView/>
+      <AppRoutes/>
     </div>
   )
 }
