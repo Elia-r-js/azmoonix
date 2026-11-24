@@ -1,75 +1,106 @@
-# React + TypeScript + Vite
+# آزمون‌ایکس (Azmoonix)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+سامانه فارسی و راست‌به‌چپ مدیریت و برگزاری آزمون آنلاین، ساخته‌شده با
+React 19، TypeScript، Vite، Tailwind CSS و React Router.
 
-Currently, two official plugins are available:
+> **وضعیت فعلی:** فرانت‌اند کامل است و برای اینکه تیم بتواند بدون بک‌اند کار
+> کند، یک لایه داده موقت روی `localStorage` مرورگر پیاده‌سازی شده است. این داده‌ها
+> فقط در همان مرورگر و همان دستگاه وجود دارند و **موقت** هستند. به همین دلیل
+> لینک عمومی آزمون فعلاً فقط روی همان مرورگری کار می‌کند که آزمون در آن ساخته
+> شده است؛ اشتراک‌گذاری واقعی بین دستگاه‌ها به بک‌اند نیاز دارد.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## امکانات
 
-## React Compiler
+- حساب فقط برای **استاد**؛ دانشجویان بدون ساخت حساب در آزمون شرکت می‌کنند
+- ورود و ثبت‌نام استاد و مسیرهای محافظت‌شده پنل
+- داشبورد استاد با آمار آزمون‌ها، شرکت‌کنندگان و میانگین نمرات
+- ساخت و ویرایش آزمون همراه با سؤالات چندگزینه‌ای، پاسخ صحیح و بارم
+- انتشار، فعال‌سازی، پایان دادن و حذف آزمون
+- ساخت لینک عمومی یکتا برای هر آزمون و امکان ساخت لینک جدید
+- پیش‌نمایش کامل آزمون همراه با پاسخ صحیح و اجرای آزمون آزمایشی توسط استاد
+- ورود دانشجو با نام و شماره دانشجویی ۱۰ رقمی، بدون نام کاربری یا رمز عبور
+- برگزاری آزمون با تایمر، ذخیره خودکار پاسخ‌ها و ثبت خودکار در پایان زمان
+- ادامه آزمون نیمه‌تمام با همان نام و شماره دانشجویی
+- یک بار شرکت برای هر شماره دانشجویی در هر آزمون
+- نمایش فقط نمره، درصد و قبولی/مردودی به دانشجو؛ پاسخ صحیح نمایش داده نمی‌شود
+- گزارش نتایج، فیلتر و جستجو و خروجی CSV برای استاد
+- تنظیمات پروفایل، تغییر رمز عبور و بازنشانی داده‌های نمونه
+- رابط واکنش‌گرا (موبایل، تبلت و دسکتاپ) و کاملاً RTL
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## حساب نمونه
 
-## Expanding the ESLint configuration
+| نقش | نام کاربری | رمز عبور |
+| --- | --- | --- |
+| استاد | `teacher` | `123456` |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+در صفحه ورود دکمه ورود سریع این حساب وجود دارد. حساب دانشجویی یا نقش
+دانشجو در سیستم ثبت‌نام وجود ندارد. چند نتیجه نمونه با نام و شماره دانشجویی
+برای آزمون‌های اولیه ثبت شده است تا گزارش‌های استاد از ابتدا داده داشته باشند.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## نحوه شرکت دانشجو
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. استاد آزمون را می‌سازد و وضعیت آن را روی «فعال» می‌گذارد.
+2. از صفحه جزئیات آزمون، لینک عمومی را کپی و برای دانشجویان ارسال می‌کند.
+3. دانشجو لینک را باز می‌کند و نام و شماره دانشجویی ۱۰ رقمی خود را وارد می‌کند.
+4. پاسخ‌ها هنگام انتخاب گزینه به‌صورت خودکار ذخیره می‌شوند.
+5. در پایان، دانشجو فقط نمره و وضعیت قبولی را می‌بیند. با وارد کردن دوباره
+   همان نام و شماره، نتیجه قبلی نمایش داده می‌شود و امکان شرکت دوباره وجود ندارد.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+آدرس عمومی آزمون به شکل `/e/:token` است. توکن به‌صورت تصادفی ساخته می‌شود و
+از صفحه جزئیات آزمون قابل کپی، پیش‌نمایش و بازتولید است.
 
+## اجرا
+
+```bash
+yarn install
+yarn dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+ساخت نسخه تولیدی و اجرای آن:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+yarn build
+yarn preview
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+بررسی کد:
+
+```bash
+yarn lint
+```
+
+## ساختار پروژه
 
 ```
+src/
+  components/      کامپوننت‌های مشترک (آیکون، کارت آمار، دیالوگ، ...)
+  context/         Auth و Toast
+  lib/
+    types.ts       مدل‌های داده (استاد، آزمون، شرکت‌کننده، نتیجه)
+    storage.ts     لایه موقت localStorage و داده‌های نمونه
+    api.ts         رابط داده (نقطه اتصال آینده به بک‌اند)
+    format.ts      اعداد، تاریخ و متن‌های فارسی
+  Layout/          قاب داشبورد، هدر و سایدبار واکنش‌گرا
+  Pages/
+    home/          صفحه معرفی
+    login/         ورود و ثبت‌نام استاد
+    dashboard/     داشبورد استاد
+    exam/          مدیریت و جزئیات آزمون و لینک عمومی
+    new-exam/      ساخت و ویرایش آزمون
+    public/        صفحه عمومی شرکت در آزمون، پیش‌نمایش و نتیجه
+    results/       گزارش نتایج استاد
+    setting/       تنظیمات حساب
+  Utils/           مسیرها و اعتبارسنجی فرم‌ها
+```
+
+## اتصال به بک‌اند در آینده
+
+تمام عملیات داده در `src/lib/api.ts` جمع شده است و به‌شکل متدهای `async`
+پیاده‌سازی شده‌اند. برای اتصال به API واقعی کافی است بدنه همین متدها با
+`fetch` جایگزین شود؛ صفحات و کامپوننت‌ها به `localStorage` وابستگی مستقیم
+ندارند. تعریف مدل‌ها نیز در `src/lib/types.ts` قرار دارد.
+
+نکته امنیتی: رمزهای نمونه در `localStorage` به‌صورت ساده نگهداری می‌شوند و
+این نسخه برای دمو/توسعه فرانت‌اند است، نه محیط عملیاتی. احراز هویت، هش رمز،
+اعتبارسنجی سمت سرور، جلوگیری از شرکت تکراری و ذخیره پاسخ‌ها باید در بک‌اند
+واقعی انجام شود.
